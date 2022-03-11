@@ -16,11 +16,27 @@ import {LitElement, html, css} from 'lit';
 export class MyElement extends LitElement {
   static get styles() {
     return css`
-      :host {
-        display: block;
-        border: solid 1px gray;
-        padding: 16px;
-        max-width: 800px;
+      .card{
+        padding: 2rem;
+        border: 1px solid gray;
+        border-radius: 0.5rem;
+        box-shadow: 0 8px 4px rgba(0,0,0,0.15);
+      }
+      .header{
+        margin: 0 0 1rem 0;
+        font-family: 'Open Sans', arial, sans-serif;
+        font-size: 3rem;
+      }
+      .btn{
+        padding: 0.5rem 1rem;
+        border: 1px solid gray;
+        border-radius: 1920px;
+        color: #272822;
+      }
+      .btn-primary{
+        background-color: red;
+        border-color: red;
+        color: white;
       }
     `;
   }
@@ -49,11 +65,13 @@ export class MyElement extends LitElement {
 
   render() {
     return html`
-      <h1>${this.sayHello(this.name)}!</h1>
-      <button @click=${this._onClick} part="button">
-        Click Count: ${this.count}
-      </button>
-      <slot></slot>
+<div class="card">
+  <h1 class="header">${this.sayHello(this.name)}!</h1>
+  <button @click=${this._onClick} part="button" class=" btn btn-primary">
+    Click Count: ${this.count}
+  </button>
+  <slot class="slot"></slot>
+</div>
     `;
   }
 

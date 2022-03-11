@@ -7,16 +7,23 @@
     <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
     <script src="../node_modules/lit/polyfill-support.js"></script>
     <script type="module" src="../my-element.js"></script>
+    <script type="module" src="../scroll-indicator.js"></script>
     <style>
       p {
         border: solid 1px blue;
         padding: 8px;
       }
+      .block{
+          height: 2000px;
+          width: 500px;
+      }
     </style>
   </head>
   <body>
-    <my-element>
-      <p>This is child content</p>
-    </my-element>
+  <div class="block"></div>
+<!--    <my-element>
+      <p>Hi I'm Michael</p>
+    </my-element>-->
+  <scroll-indicator></scroll-indicator>
   </body>
 </html>
