@@ -1,0 +1,26 @@
+:root {
+  --background-color: #fff;
+  --text-color: #121416d8;
+  --link-color: #543fd7;
+  --white: #ffffff;
+  --gradient-bright: linear-gradient(
+    90deg,
+    #fd5c63 0%,
+    #f2b8b5 43.94%,
+    #f2b8b5 65.9%,
+    #115ffb 100%
+  );
+  * {
+    transition: all 0.25s ease-in-out;
+  }
+}
+
+html[data-theme='light'] {
+  --background-color: #fff;
+  --text-color: #222222;
+}
+
+html[data-theme='dark'] {
+--background-color: #222222;
+--text-color: #fff;
+}

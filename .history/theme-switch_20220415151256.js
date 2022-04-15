@@ -6,90 +6,46 @@
 
 import { LitElement, html, css } from 'lit';
 
-
-export class scrollIndicator extends LitElement {
+export class themeSwitch extends LitElement {
   static get styles() {
     return css`
           
           :host{
             
           }
-          .scrollIndicator {
-            position: fixed;
-            right: 1.5rem;
-            bottom: 1.5rem;
-            width: 3rem;
-            height: 3rem;
-            padding: 0;
-            border: none;
-            border-radius: 50%;
-            background: white;
-            overflow: hidden;
-            z-index: 99;
-            opacity: 0;
-            transition: 0.15s ease-in-out all;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
-          }
+.theme-toggle__floating {
+ 
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    right: 2rem;
+    bottom: 2rem;
+    height: 3rem;
+    width: 3rem;
+    border-radius: 20rem;
+    background-color: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+    transition: all 0.25s ease-in-out;
+    overflow: hidden;
+}
+.theme-toggle__floating:hover{
+   transform: scale(1.05);
+      &[class*=' bi-'] {
+        &::before {
+          transform: rotate(45deg) scale(1.2);
+        }
+      }
 
-          .scrollIndicator:hover {
-            transform: scale(1.15);
-          }
-
-          .scrollIndicator__content::before {
-            content: 'Top';
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: absolute;
-            height: 3rem;
-            width: 3rem;
-            top: 0;
-            left: 0;
-            font-size: 0.75rem;
-            color: black;
-            transform: translateY(0);
-            transition: 0.15s ease-in-out all;
-            z-index: 99;
-          }
-
-          .scrollIndicator__content--overflow {
-            height: 3rem;
-            width: 3rem;
-            position: relative;
-            z-index: 99;
-            background: linear-gradient(136deg, #8c193c 0%, #c30045 100%);
-          }
-          .scrollIndicator__content--overflow::before {
-              content: 'Top';
-              display: flex;
-              justify-content: center;
-              align-items: center;
-              position: absolute;
-              height: 3rem;
-              width: 3rem;
-              top: 0;
-              left: 0;
-              font-size: 0.75rem;
-              color: white;
-              transform: translateY(0);
-              transition: 0.15s ease-in-out all;
-              z-index: 100;
-            }
-          
-
-          .scrollIndicator__background {
-            height: 0;
-            width: 100%;
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            z-index: 0;
-          }
+}
         `;
   }
 
   static get properties() {
     return {
+
       name: { type: String },
       count: { type: Number },
     };
@@ -103,23 +59,16 @@ export class scrollIndicator extends LitElement {
     this.SCROLL_INDICATOR_OVERFLOW = '';
     this.SCROLL_INDICATOR_BACKGROUND = '';
     this.addScrollIndicator = this.addScrollIndicator.bind(this);
-
-
   }
 
   connectedCallback() {
     super.connectedCallback();
     window.addEventListener('scroll', this.addScrollIndicator);
-
   }
 
   render() {
     return html`
-            <div id="scrollIndidcator" class="scrollIndicator">
-              <div id="scrollIndicator__content" class="scrollIndicator__content"></div>
-              <div id="scrollIndicator__content--overflow" class="scrollIndicator__content--overflow"></div>
-              <div id="scrollIndicator__background" class="scrollIndicator__background"></div>
-            </div>
+    <div><h1 class="theme-toggle__floating">theme switch</h1></div>
         `;
 
   }
@@ -155,8 +104,27 @@ export class scrollIndicator extends LitElement {
     this.dispatchEvent(new CustomEvent('page-scrolled'));
   }
 
-  sayHello(name) {
-    return `Hello, ${name}`;
+  getTheme() {
+    const today = new Date();
+    const currentHour = today.getHours();
+    const currentTheme = {
+      theme: '',
+      themeIcon: '',
+    };
+    const storedTheme = localStorage.getItem('theme')
+      || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : '');
+
+    if (storedTheme) {
+      currentTheme.theme = storedTheme;
+    } else if (currentHour >= 18) {
+      currentTheme.theme = 'dark';
+    } else if (currentHour >= 12) {
+      currentTheme.theme = 'light';
+    } else if (currentHour >= 6) {
+      currentTheme.theme = 'light';
+    } else {
+      currentTheme.theme = 'light';
+    }
   }
 }
-customElements.define('scroll-indicator', scrollIndicator);
+customElements.define('theme-switch', themeSwitch);

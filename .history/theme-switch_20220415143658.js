@@ -6,8 +6,7 @@
 
 import { LitElement, html, css } from 'lit';
 
-
-export class scrollIndicator extends LitElement {
+export class themeSwitch extends LitElement {
   static get styles() {
     return css`
           
@@ -90,6 +89,7 @@ export class scrollIndicator extends LitElement {
 
   static get properties() {
     return {
+
       name: { type: String },
       count: { type: Number },
     };
@@ -103,23 +103,16 @@ export class scrollIndicator extends LitElement {
     this.SCROLL_INDICATOR_OVERFLOW = '';
     this.SCROLL_INDICATOR_BACKGROUND = '';
     this.addScrollIndicator = this.addScrollIndicator.bind(this);
-
-
   }
 
   connectedCallback() {
     super.connectedCallback();
     window.addEventListener('scroll', this.addScrollIndicator);
-
   }
 
   render() {
     return html`
-            <div id="scrollIndidcator" class="scrollIndicator">
-              <div id="scrollIndicator__content" class="scrollIndicator__content"></div>
-              <div id="scrollIndicator__content--overflow" class="scrollIndicator__content--overflow"></div>
-              <div id="scrollIndicator__background" class="scrollIndicator__background"></div>
-            </div>
+    <div><h1>theme switch</h1></div>
         `;
 
   }
@@ -159,4 +152,4 @@ export class scrollIndicator extends LitElement {
     return `Hello, ${name}`;
   }
 }
-customElements.define('scroll-indicator', scrollIndicator);
+customElements.define('theme-switch', themeSwitch);

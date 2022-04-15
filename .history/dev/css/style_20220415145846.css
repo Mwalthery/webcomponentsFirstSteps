@@ -1,0 +1,27 @@
+html[data-theme='light'] {
+  --background-color: #fff;
+  --text-color: #121416d8;
+
+    90deg,
+    #fd5c63 0%,
+    #f2b8b5 43.94%,
+    #f2b8b5 65.9%,
+    #115ffb 100%
+  );
+}
+
+html[data-theme='dark'] {
+    --background-color: #222222;
+--text-color: red;
+ 
+  img {
+    filter: brightness(0.8);
+  }
+  .hero-image {
+    filter: brightness(0.8);
+  }
+  .hero-text--main,
+  .hero-text--sub {
+    filter: brightness(1);
+  }
+}
